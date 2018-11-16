@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>MY APP</title>
+  <title>BOOK YOUR ROOM</title>
 </head>
 
 <body>
@@ -14,11 +14,11 @@
   </form>
   <button id="update"> Update </button>
   <button id="delete"> Delete Darth</button>
-<br>
-<br>
-<br>
+  <br>
+  <br>
+  <br>
 
-  <form id="bookingForm" method="POST" action="/new-booking-test">
+  <form id="bookingForm" method="POST" action="/new-booking-test" >
     <div className="form-group">
       <label> Username : </label>
       <input name="userName" type='input' placeholder="Enter user name" className="ml-3" />
@@ -32,11 +32,15 @@
       <label>To:</label>
       <input name="to" type="time" step="1800" min="09:00" max="17:30" />
     </div>
-    <!-- <input type="hidden" name="room" > -->
+    <input type="hidden" name="room" value="Ada">
     <!-- <input type="button" id="submitForm"value="Submit" /> -->
     <input type="submit" value="Submit" />
   </form>
 
+
+  <div>
+    
+  </div>
 
   <script src="main.js"></script>
 
