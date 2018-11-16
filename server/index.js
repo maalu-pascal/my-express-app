@@ -1,8 +1,8 @@
 const express = require('express');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 
 const app = express();
-const port = 3010;
+const port = 3020;
 
 const entries = [];
 const data = {
@@ -59,18 +59,18 @@ const data = {
     ]
 };
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-app.listen(port, function () { console.log('listening on ', port) })
+app.listen(port, function () { console.log('listening on ', port); });
 
-app.use(express.static('public'))
+app.use(express.static('public'));
 
 //To render the home page.
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/index.html')
-})
+    res.sendFile(__dirname + '/index.html');
+});
 
 app.post('/quotes', (req, res) => {
 
@@ -78,16 +78,16 @@ app.post('/quotes', (req, res) => {
         "id": "0202",
         "name": req.body.name,
         "quote": req.body.quote
-    }
+    };
     entries.push(newEntry);
     res.redirect('/');
 
-})
+});
 
 app.post('/new-booking-test', (req, res) => {
 
-    const user = data.users.find((user)=>{ return(user.name.toUpperCase === req.body.userName.toUpperCase)})
-    const room = data.roomDetails.find((room) => { return (room.name === req.body.room) });
+    const user = data.users.find((user)=>{ return(user.name.toUpperCase === req.body.userName.toUpperCase);});
+    const room = data.roomDetails.find((room) => { return (room.name === req.body.room); });
     let newEntry = {};
 
     if (room && user) {
@@ -98,7 +98,7 @@ app.post('/new-booking-test', (req, res) => {
             "from": req.body.from,
             "to": req.body.to,
             "date":`${new Date()}`
-        }
+        };
         data.roomBookings.push(newEntry);
         room.booked.push(newEntry.id);
         user.bookings.push(newEntry.id);
@@ -106,30 +106,30 @@ app.post('/new-booking-test', (req, res) => {
     console.log("data : ",data);
     
     res.redirect('/');
-})
+});
 
 
 app.put('/quotes', (req, res) => {
-    let updateEntry = entries.find((entry) => { return (entry.name === 'yoda') });
+    let updateEntry = entries.find((entry) => { return (entry.name === 'yoda'); });
 
     if (updateEntry) {
         updateEntry.name = req.body.name;
         updateEntry.quote = req.body.quote;
     }
 
-})
+});
 
 app.delete('/quotes', (req, res) => {
     console.log("delete: ", req.body);
 
-})
+});
 
 //All Entries
 app.get('/entries', function (req, res) {
     res.send(entries);
-})
+});
 
 //All datas
 app.get('/data', function (req, res) {
     res.send(data);
-})
+});
